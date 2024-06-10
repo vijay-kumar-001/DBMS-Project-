@@ -1,0 +1,460 @@
+create database job;
+use job;
+-- Creating the 'applicant' table
+CREATE TABLE applicant (
+    aid INT  PRIMARY KEY,
+    email VARCHAR(255),
+    mobileno VARCHAR(15),
+    name VARCHAR(100),
+    dob DATE
+);
+
+-- Creating the 'submission' table
+CREATE TABLE submission (
+    sid INT AUTO_INCREMENT PRIMARY KEY,
+    aid INT UNIQUE,
+    email VARCHAR(255),
+    name VARCHAR(100),
+    position VARCHAR(100),
+    submissiondate DATE,
+    FOREIGN KEY (aid) REFERENCES applicant(aid)
+);
+
+-- Creating the 'background' table
+CREATE TABLE background (
+    aid INT UNIQUE,
+    exp INT,
+    name VARCHAR(100),
+    skill VARCHAR(100),
+    previouscompany VARCHAR(100),
+    FOREIGN KEY (aid) REFERENCES applicant(aid)
+);
+
+-- Creating the 'feedback' table
+CREATE TABLE feedback (
+    aid INT UNIQUE,
+    fid INT AUTO_INCREMENT PRIMARY KEY,
+    rating INT,
+    feedbacktype VARCHAR(100),
+    content TEXT,
+    FOREIGN KEY (aid) REFERENCES applicant(aid)
+);
+
+-- Creating the 'vision' table
+CREATE TABLE vision (
+    aid INT UNIQUE,
+    vid INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    softskill VARCHAR(100),
+    proficiency VARCHAR(100),
+    FOREIGN KEY (aid) REFERENCES applicant(aid)
+);
+
+-- Inserting data into the 'applicant' table
+INSERT INTO applicant (aid, email, mobileno, name, dob) 
+VALUES 
+(1, 'john.doe@example.com', '1234567890', 'John Doe', '1990-05-15'),
+(2, 'jane.smith@example.com', '9876543210', 'Jane Smith', '1988-09-20'),
+(3, 'michael.johnson@example.com', '5551234567', 'Michael Johnson', '1995-12-10'),
+(4, 'susan.wong@example.com', '3335557777', 'Susan Wong', '1993-03-25'),
+(5, 'david.brown@example.com', '1112223333', 'David Brown', '1991-11-08'),
+(6, 'emily.white@example.com', '4447779999', 'Emily White', '1997-08-14'),
+(7, 'william.clark@example.com', '6668880000', 'William Clark', '1994-06-30'),
+(8, 'olivia.thomas@example.com', '2224446666', 'Olivia Thomas', '1992-04-17'),
+(9, 'jacob.roberts@example.com', '8889991111', 'Jacob Roberts', '1989-07-22'),
+(10, 'emma.johnson@example.com', '7776665555', 'Emma Johnson', '1996-02-28');
+
+-- Inserting data into the 'submission' table
+INSERT INTO submission (aid, email, name, position, submissiondate) 
+VALUES 
+(1, 'john.doe@example.com', 'John Doe', 'Software Engineer', '2024-04-20'),
+(2, 'jane.smith@example.com', 'Jane Smith', 'Data Analyst', '2024-04-21'),
+(3, 'michael.johnson@example.com', 'Michael Johnson', 'Project Manager', '2024-04-22'),
+(4, 'susan.wong@example.com', 'Susan Wong', 'UX Designer', '2024-04-23'),
+(5, 'david.brown@example.com', 'David Brown', 'Marketing Specialist', '2024-04-24'),
+(6, 'emily.white@example.com', 'Emily White', 'HR Coordinator', '2024-04-25'),
+(7, 'william.clark@example.com', 'William Clark', 'Financial Analyst', '2024-04-26'),
+(8, 'olivia.thomas@example.com', 'Olivia Thomas', 'Sales Manager', '2024-04-27'),
+(9, 'jacob.roberts@example.com', 'Jacob Roberts', 'Software Developer', '2024-04-28'),
+(10, 'emma.johnson@example.com', 'Emma Johnson', 'Operations Manager', '2024-04-29');
+
+-- Inserting data into the 'background' table
+INSERT INTO background (aid, exp, name, skill, previouscompany) 
+VALUES 
+(1, 5, 'John Doe', 'Java, Python, SQL', 'Tech Inc.'),
+(2, 3, 'Jane Smith', 'R, Python, Data Visualization', 'Data Corp.'),
+(3, 7, 'Michael Johnson', 'Project Management, Team Leadership', 'Management Solutions'),
+(4, 4, 'Susan Wong', 'UI/UX Design, Adobe Creative Suite', 'Design Studios'),
+(5, 6, 'David Brown', 'Marketing Strategy, Social Media Management', 'Ad Agency'),
+(6, 2, 'Emily White', 'HR Policies, Recruitment', 'Tech Startup'),
+(7, 3, 'William Clark', 'Financial Analysis, Excel', 'Finance Firm'),
+(8, 8, 'Olivia Thomas', 'Sales Techniques, CRM', 'Sales Corporation'),
+(9, 5, 'Jacob Roberts', 'Java, JavaScript, Agile Development', 'Tech Startup'),
+(10, 7, 'Emma Johnson', 'Operations Management, Process Improvement', 'Manufacturing Company');
+
+-- Inserting data into the 'feedback' table
+INSERT INTO feedback (aid, rating, feedbacktype, content) 
+VALUES 
+(1, 4, 'Technical', 'John has strong programming skills and is a quick learner.'),
+(2, 5, 'General', 'Jane is a great communicator and works well in teams.'),
+(3, 4, 'Management', 'Michael shows excellent leadership qualities and delivers results effectively.'),
+(4, 4, 'Design', 'Susan has a keen eye for design and understands user experience well.'),
+(5, 3, 'Marketing', 'David needs to focus more on data-driven marketing strategies.'),
+(6, 5, 'HR', 'Emily is very efficient in handling HR tasks and has a good understanding of employee needs.'),
+(7, 4, 'Finance', 'William is adept at financial analysis and provides valuable insights.'),
+(8, 5, 'Sales', 'Olivia excels in sales management and effectively leads her team.'),
+(9, 4, 'Technical', 'Jacob is a skilled developer and contributes effectively to projects.'),
+(10, 4, 'Operations', 'Emma ensures smooth operations and identifies areas for improvement effectively.');
+
+-- Inserting data into the 'vision' table
+INSERT INTO vision (aid, name, softskill, proficiency) 
+VALUES 
+(1, 'John Doe', 'Problem Solving', 'Advanced'),
+(2, 'Jane Smith', 'Communication', 'Intermediate'),
+(3, 'Michael Johnson', 'Leadership', 'Expert'),
+(4, 'Susan Wong', 'Creativity', 'Advanced'),
+(5, 'David Brown', 'Analytical Thinking', 'Intermediate'),
+(6, 'Emily White', 'Teamwork', 'Intermediate'),
+(7, 'William Clark', 'Financial Analysis', 'Advanced'),
+(8, 'Olivia Thomas', 'Negotiation', 'Expert'),
+(9, 'Jacob Roberts', 'Agile Development', 'Intermediate'),
+(10, 'Emma Johnson', 'Process Optimization', 'Advanced');
+
+
+ --exp 4
+ 
+
+--relational operator 
+SELECT name, exp
+FROM background
+WHERE exp >= 5;
+
+--Query to Retrieve Applicants Who Submitted Before April 25, 2024:
+
+SELECT name, submissiondate
+FROM submission
+WHERE submissiondate < '2024-04-25';
+
+to Retrieve Applicants Who Received a Rating of 5 in Feedback:
+
+--query to retreive  name and email of software engineera or data analyst
+SELECT name, email 
+FROM submission 
+WHERE position = 'Software Engineer' OR position = 'Data Analyst';
+
+
+Query to Retrieve Applicants Born After January 1, 1993:
+
+SELECT name, dob
+FROM applicant
+WHERE dob > '1993-01-01';
+
+
+-- logical operators 
+
+SELECT name, position
+FROM submission
+WHERE position = 'Software Engineer' OR position = 'Data Analyst';
+
+Query to Retrieve Applicants Who Applied for Technical Positions
+
+SELECT name, position
+FROM submission
+WHERE position LIKE '%Engineer%' OR position LIKE '%Developer%';
+
+
+
+-- like
+ 
+SELECT name, skill
+FROM background
+WHERE skill LIKE '%Java%';
+ 
+-- order by 
+query to retrieve name and experience of applicant from background table:
+
+SELECT name, exp
+FROM background
+ORDER BY exp DESC;
+
+--IN 
+
+SELECT name, position
+FROM submission
+WHERE position IN ('Software Engineer', 'Data Analyst', 'Project Manager');
+
+--not in
+
+SELECT name, position
+FROM submission
+WHERE position NOT IN ('Software Engineer', 'Data Analyst', 'Project Manager');
+--BETWEEN AND 
+
+SELECT name, exp
+FROM background
+WHERE exp BETWEEN 4 AND 7;
+
+
+--NOT BETWEEN
+
+SELECT name, exp
+FROM background
+WHERE exp NOT BETWEEN 4 AND 7;
+
+
+--DISTINCT
+
+SELECT DISTINCT position
+FROM submission;
+
+
+--- case manipulation 
+
+Query to Convert Names to Uppercase:
+
+SELECT UPPER(name) AS uppercase_name
+FROM applicant;
+
+
+Query to Convert Emails to Lowercase:
+
+SELECT LOWER(email) AS lowercase_email
+FROM applicant;
+
+Query to Capitalize Applicant Names:
+
+
+
+
+ --extract the first three characters of the names of applicants
+
+SELECT SUBSTR(name, 1, 3) AS name_short
+FROM applicant;
+
+
+--query selects the names of applicants from the applicant table and finds the position of the '@' symbol in their email addresses using the INSTR function
+
+SELECT name, INSTR(email, '@') AS at_position
+FROM applicant;
+
+--date formation
+--NO DATA FORMAT IN DB
+SELECT name, DATE_FORMAT(dob, '%M %e, %Y') AS formatted_dob
+FROM applicant;
+
+--exp 5
+
+--average 
+calculates the average years of experience across all applicants:
+
+
+SELECT AVG(exp) AS average_experience FROM background;
+
+
+--count of submissions grouped by the position
+
+SELECT position, COUNT(*) AS submission_count FROM submission GROUP BY position;
+
+--max and min 
+
+SELECT 
+    MAX(exp) AS max_experience, 
+    MIN(exp) AS min_experience 
+FROM background;
+
+
+
+-- Calculating the variance of experience among applicants
+SELECT VARIANCE(exp) AS experience_variance
+FROM background;
+
+--Violating foreign key constraintViolating foreign key constraint
+
+INSERT INTO submission (aid, email, name, position, submissiondate) 
+VALUES 
+(11, 'new.applicant@example.com', 'New Applicant', 'Intern', '2024-05-01');
+
+--Violating foreign key constraint in the 'background' table
+
+INSERT INTO background (aid, exp, name, skill, previouscompany) 
+VALUES 
+(11, 2, 'New Applicant', 'C++, Java', 'Tech Inc.');
+
+--Violating Primary Key Constraint:
+
+INSERT INTO applicant (aid, email, mobileno, name, dob) 
+VALUES 
+(1, 'new.email@example.com', '9998887777', 'New Applicant', '2000-01-01');
+
+--Violating Check Constraint:
+
+INSERT INTO applicant (aid, email, mobileno, name, dob) 
+VALUES 
+(11, 'new.applicant@example.com', '1112223333', 'New Applicant', '2025-01-01');
+
+
+
+--union 
+--Finding all unique emails
+-- Finding all unique emails from both 'applicant' and 'submission' tables
+(SELECT email FROM applicant)
+UNION
+(SELECT email FROM submission);
+
+
+-- intersect 
+-- Finding common emails between 'applicant' and 'submission' tables
+(SELECT email FROM applicant)
+INTERSECT
+(SELECT email FROM submission);
+
+-- minus 
+
+
+
+-- Finding applicants who have submitted an application but have not received any feedback
+SELECT name
+FROM submission
+EXCEPT
+SELECT s.name
+FROM submission s
+JOIN feedback f ON s.aid = f.aid;
+
+
+exp 9  
+-- single row subqueries
+
+-- This query finds the applicant with the highest work experience
+
+SELECT applicant.name, background.exp
+FROM applicant
+INNER JOIN background ON applicant.aid = background.aid
+WHERE background.exp = (
+  SELECT MAX(exp)
+  FROM background
+);
+
+--query will return the name of the applicant who has the highest rating in the feedback table:
+SELECT name 
+FROM applicant 
+WHERE aid = (
+    SELECT aid 
+    FROM feedback 
+    ORDER BY rating DESC 
+    LIMIT 1
+);
+
+-- Finding applicants with more years of experience than the average
+SELECT * 
+FROM background
+WHERE exp > (SELECT AVG(exp) FROM background);
+
+--multi
+
+-- Finding applicants who submitted for positions after another applicant
+SELECT * 
+FROM submission s1
+WHERE submissiondate > (SELECT submissiondate FROM submission s2 WHERE s2.aid = s1.aid - 1);
+
+-- Finding applicants who have submitted for technical positions
+SELECT * 
+FROM applicant
+WHERE aid IN (
+    SELECT aid 
+    FROM submission 
+    WHERE position IN ('Software Engineer', 'Data Analyst', 'UX Designer', 'Software Developer')
+);
+
+
+--joins
+--Inner Join to Retrieve Applicant Information with Submission Details:
+
+
+SELECT a.*, s.position, s.submissiondate
+FROM applicant a
+INNER JOIN submission s ON a.aid = s.aid;
+
+
+--Left Join to Retrieve Applicant Information with Background Details:
+
+SELECT a.*, b.exp, b.skill
+FROM applicant a
+LEFT JOIN background b ON a.aid = b.aid;
+
+--Inner Join to Retrieve Applicant Information with Feedback Details:
+
+SELECT a.*, f.rating, f.feedbacktype
+FROM applicant a
+INNER JOIN feedback f ON a.aid = f.aid;
+
+--Left Join to Retrieve Applicant Information with Vision Details:
+
+SELECT a.*, v.softskill, v.proficiency
+FROM applicant a
+LEFT JOIN vision v ON a.aid = v.aid;
+
+DELIMITER //
+
+CREATE PROCEDURE fetch_feedback(IN applicant_id INT)
+BEGIN
+    DECLARE v_applicant_name VARCHAR(255);
+    DECLARE v_feedback_type VARCHAR(255);
+    DECLARE v_content VARCHAR(255);
+
+    -- Declare variables to hold query results
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE cur CURSOR FOR 
+        SELECT a.name, f.feedbacktype, f.content 
+        FROM applicant a 
+        LEFT JOIN feedback f ON a.aid = f.aid 
+        WHERE a.aid = applicant_id;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    -- Select applicant name
+    SELECT name INTO v_applicant_name FROM applicant WHERE aid = applicant_id;
+
+    -- Start printing feedback
+    SELECT 'Feedback for ' AS output, v_applicant_name AS applicant_name;
+    SELECT '--------------------------------' AS output;
+
+    OPEN cur;
+    read_loop: LOOP
+        FETCH cur INTO v_applicant_name, v_feedback_type, v_content;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        SELECT CONCAT('Type: ', v_feedback_type) AS output;
+        SELECT CONCAT('Content: ', v_content) AS output;
+        SELECT '--------------------------------' AS output;
+    END LOOP;
+    CLOSE cur;
+
+    -- Handle no feedback found
+    IF NOT FOUND THEN
+        SELECT CONCAT('No feedback found for applicant ID: ', applicant_id) AS output;
+    END IF;
+END//
+
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
